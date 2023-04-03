@@ -10,6 +10,8 @@
 %forgemeta
 
 Name:      hunspell-sk
+# Fedora hunspell-sk package with Epoch 1
+Epoch:     1
 Version:   2.4.7
 Release:   1%{?dist}
 Summary:   Slovak dictionary for hunspell
@@ -47,7 +49,7 @@ cp -p dictionaries/sk-SK-ascii.dic $RPM_BUILD_ROOT/%{_datadir}/%{dict_dirname}/s
 %{_datadir}/%{dict_dirname}/*
 
 %changelog
-* Mon Apr 03 2023 Jan Musinsky <musinsky@gmail.com> - 2.4.7-1
+* Tue Apr 04 2023 Jan Musinsky <musinsky@gmail.com> - 1:2.4.7-1
 - update snapshot to d4f4383 (2.4.7 version)
 
 * Thu Feb 23 2023 Caolán McNamara <caolanm@redhat.com> - 1:0.20110228-24
