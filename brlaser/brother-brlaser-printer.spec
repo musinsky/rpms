@@ -5,20 +5,20 @@
 Name:           brother-brlaser-printer
 Version:        6
 %forgemeta
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Brother laser printer driver
 
-License:        GPLv2
+License:        GPL-2.0
 URL:            %{forgeurl}
 Source0:        %{forgesource}
 Patch0:         patch-20210908.patch
+Patch1:         tempfile.h.patch
 
-BuildRequires:  redhat-rpm-config
 BuildRequires:  cmake
-BuildRequires:  cmake-rpm-macros
 BuildRequires:  gcc-c++
 BuildRequires:  cups-devel
 Requires:       cups-filesystem
+Requires:       ghostscript
 
 %description
 brlaser is a CUPS driver for Brother laser printers.
@@ -33,15 +33,18 @@ For a detailed list of supported printers, please refer to
 
 %prep
 %forgesetup
-%patch0 -p1
+%patch -P0 -p1
+%patch -P1
 
 %build
 %cmake
 %cmake_build
-# %%cmake_build --target rastertobrlaser
+# %dnl cmake_build --target rastertobrlaser
 
 %install
 %cmake_install
+#printf "=> '_cups_serverbin'='%s'\n" %{_cups_serverbin}
+#printf "=> '_datadir'='%s'\n" %{_datadir}
 
 %files
 %{_cups_serverbin}/filter/rastertobrlaser
@@ -49,6 +52,11 @@ For a detailed list of supported printers, please refer to
 %doc README.md
 
 %changelog
+* Fri May 16 2025 Jan Musinsky <musinsky@gmail.com> - 6-3
+- Package brlaser officially in Fedora and EPEL repositories (released 2022-05)
+- Now brlaser only as source package example (simple and quick compilation)
+- Add patches from GitHub pull requests 175
+
 * Thu Oct 07 2021 Jan Musinsky <musinsky@gmail.com> - 6-2
 - Fedora 35
 - Add patches from GitHub pull requests 92, 107 and 133

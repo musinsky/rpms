@@ -1,0 +1,15 @@
+# 2025-05-16
+# patch from https://github.com/pdewacht/brlaser/pull/175
+#
+# $ diff -Naur test/tempfile.h.orig test/tempfile.h > tempfile.h.patch
+
+--- test/tempfile.h.orig
++++ test/tempfile.h
+@@ -20,6 +20,7 @@
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
++#include <cstdint>
+ #include <vector>
+ 
+ class tempfile {

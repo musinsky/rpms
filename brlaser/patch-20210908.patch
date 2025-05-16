@@ -1,8 +1,10 @@
-# 2021-10-07
-Add this patches:
-https://github.com/pdewacht/brlaser/pull/92     (Added sevral supported printers to brlaser)
-https://github.com/pdewacht/brlaser/pull/107    (add DCP-7070DW model)
-https://github.com/pdewacht/brlaser/pull/133    (Fix MFC-7460DN PPD file name)
+# 2025-05-16
+# Add this patches:
+# https://github.com/pdewacht/brlaser/pull/92     (Added sevral supported printers to brlaser)
+# https://github.com/pdewacht/brlaser/pull/107    (add DCP-7070DW model)
+# https://github.com/pdewacht/brlaser/pull/133    (Fix MFC-7460DN PPD file name)
+#
+# $ git diff > patch-20210908.patch
 
 diff --git a/README.md b/README.md
 index 90cb2b7..c92d5b3 100644
