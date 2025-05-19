@@ -11,17 +11,20 @@ $ dnf install printer-driver-brlaser
 
 [brlaser](https://github.com/pdewacht/brlaser): Brother laser printer driver.
 
-[brother-brlaser-printer](https://copr.fedorainfracloud.org/coprs/musinsky/brlaser/)
-package repository for Fedora (or CentOS).
+Fedora [brother-brlaser-printer](https://copr.fedorainfracloud.org/coprs/musinsky/brlaser/)
+copr package repository (no longer maintained).
 
-### Create SRPM
+### Create SRPM package
 ```
+# download specfile
 $ wget https://raw.githubusercontent.com/musinsky/rpms/rawhide/brlaser/brother-brlaser-printer.spec -P $(rpm --eval %{_specdir})
-$ rpmdev-spectool -g -R $(rpm --eval %{_specdir})/brother-brlaser-printer.spec
-# add patches
-$ wget https://raw.githubusercontent.com/musinsky/rpms/rawhide/brlaser/patch-20210908.patch -P $(rpm --eval %{_sourcedir})
-$ wget https://raw.githubusercontent.com/musinsky/rpms/rawhide/brlaser/tempfile.h.patch -P $(rpm --eval %{_sourcedir})
-$ rpmbuild -bs $(rpm --eval %{_specdir})/brother-brlaser-printer.spec   # -bs, -bb, -ba
+
+# download sources and patches from specfile
+$ rpmdev-spectool --get-files --sourcedir $(rpm --eval %{_specdir})/brother-brlaser-printer.spec
+
+# build SRPM package
+$ rpmbuild -bs $(rpm --eval %{_specdir})/brother-brlaser-printer.spec   # -bs (source), -bb (binary), -ba (all)
+
 $ ls $(rpm --eval %{_srcrpmdir})
 brother-brlaser-printer-6-3.20200420git9d7ddda.fc42.src.rpm
 ```
