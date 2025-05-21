@@ -9,7 +9,8 @@
 
 Name:           brother-brlaser-printer
 Version:        6
-%forgemeta -i   # flag '-i' for info or flag '-v' for verbose
+# forgemeta with flag '-i' for info or flag '-v' for verbose
+%forgemeta -i
 Release:        3%{?dist}
 Summary:        Brother laser printer driver
 
@@ -30,14 +31,15 @@ brlaser is a CUPS driver for Brother laser printers. For a detailed list
 of supported printers, please refer to %{forgeurl}
 
 %prep
-%forgesetup -v  # flag '-v' for verbose, after this point forgemeta is no longer used
+# forgesetup with flag '-v' for verbose, after this point forgemeta is no longer used
+%forgesetup -v
 %patch -P0 -p1
 %patch -P1
 
 %build
 %cmake
 %cmake_build
-%dnl # cmake_build --target rastertobrlaser
+%dnl # %cmake_build --target rastertobrlaser
 
 %install
 %cmake_install
