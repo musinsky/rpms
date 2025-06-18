@@ -1,0 +1,25 @@
+# 2025-06-18
+
+https://github.com/cvmfs/cvmfs/blob/devel/packaging/rpm/cvmfs-universal.spec
+Tested on Version: 2.13.0
+
+========================================
+# without selinux
+%define selinux_cvmfs 0
+%define selinux_cvmfs_server 0
+
+# without golang utilities
+%define build_gateway 0
+%define build_ducc 0
+%define build_snapshotter 0
+========================================
+Pridanie tychto riadkov (napr. pred klucove slovo 'Summary') do suboru
+'cvmfs-universal.spec' umozni kompilaciu bez selinux, resp. bez golang. Menej
+zavislosti a rychlejsie kompilacia. Idealne pri vytvarani rpm balika na nejakom
+lokalnom PC.
+
+========================================
+#BuildRequires: valgrind-devel
+========================================
+Tato zavislost uz v skutocnosti nie je potrebna, mozno zakomentovat. Zbytocna
+instalacia znacneho mnozstva nepotrebnych balikov.
