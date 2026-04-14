@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# 2026-04-07
-# https://github.com/musinsky/rpms/blob/rawhide/root5/root5-get.master.files.sh
+# 2026-04-14
+# https://github.com/musinsky/rpms/blob/rawhide/root5/root5.get.root.master.files.sh
 
 CUR_DIR="$PWD"
 ROOT_GH="https://raw.githubusercontent.com/root-project/root/master"
@@ -41,7 +41,7 @@ printf "Last commit: %s in 'root/master/%s/' dir\n\n" \
 LAST_DATE="$RMKDEPEND_DATE"
 [[ "$MINICERN_DATE" > "$RMKDEPEND_DATE" ]] && LAST_DATE="$MINICERN_DATE"
 LAST_DATE=$(date --date "$LAST_DATE" +%F)
-TGZ_FILE="root.master.$LAST_DATE.files.tar.gz"
+TGZ_FILE="root5.with.root.master.$LAST_DATE.files.tar.gz"
 tar -czf "$TGZ_FILE" "$RMKDEPEND_DIR5" "$MINICERN_DIR5"
 mv --verbose "$TGZ_FILE" "$CUR_DIR/"
 rm -rf "$ROOT5_DIR"
