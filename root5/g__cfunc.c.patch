@@ -1,0 +1,26 @@
+--- cint/cint/src/g__cfunc.c.orig	2025-09-10 14:42:06.000000000 +0200
++++ cint/cint/src/g__cfunc.c	2026-04-02 02:41:18.363136586 +0200
+@@ -32,7 +32,7 @@
+ /* POSIX.2 */
+ 
+ /* OTHER */
+-int getopt();
++// int getopt();
+ 
+ /* CINT */
+ #include "common.h"
+@@ -847,10 +847,10 @@
+ *
+ ******************************************************/
+ 
+-extern long G__int();
+-extern double G__double();
+-extern char  *G__string();
+-extern struct G__input_file G__ifile;
++// extern long G__int();
++// extern double G__double();
++// extern char  *G__string();
++// extern struct G__input_file G__ifile;
+ 
+ 
+ int G__compiled_func(result7,funcname,libp,hash)
