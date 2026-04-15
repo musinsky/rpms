@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# 2026-04-14
+# 2026-04-15
 # https://github.com/musinsky/rpms/blob/rawhide/root5/root5.create.SRPM.package.sh
 
 check_command() {
@@ -21,9 +21,9 @@ GHC="https://raw.githubusercontent.com/musinsky/rpms/rawhide/root5/"
 SPECS_DIR="$(rpm --eval '%{_specdir}')"
 SOURCES_DIR="$(rpm --eval '%{_sourcedir}')"
 
-# # download specfile
-# curl --silent --location "$GHC/root5.spec" \
-    #      --remote-name --output-dir "$SPECS_DIR" --create-dirs
+# download specfile
+curl --silent --location "$GHC/root5.spec" \
+     --remote-name --output-dir "$SPECS_DIR" --create-dirs
 
 # download sources and patches from specfile
 rpmdev-spectool --get-files --sourcedir "$SPECS_DIR/root5.spec"
