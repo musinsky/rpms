@@ -23,15 +23,22 @@ Source1:   root5.with.root.master.2026-02-18.files.tar.gz
 Patch10:   https://raw.githubusercontent.com/musinsky/rpms/rawhide/root5/g__cfunc.c.patch
 Patch90:   https://raw.githubusercontent.com/musinsky/rpms/rawhide/root5/HighlightROOT5.patch
 
-BuildRequires: gcc gcc-c++ gcc-gfortran make
-BuildRequires: libjpeg-devel libpng-devel
-Requires:      bash
+BuildRequires: gcc gcc-c++ gcc-gfortran make binutils
+BuildRequires: libX11-devel libXpm-devel libXft-devel libXext-devel
+BuildRequires: freetype-devel pcre-devel zlib-devel xz-devel lz4-devel xxhash-devel
+BuildRequires: mesa-libGL-devel mesa-libGLU-devel glew-devel ftgl-devel
+BuildRequires: mariadb-devel sqlite-devel
+BuildRequires: libAfterImage-devel libpng-devel libxml2-devel
 
 %description
-ROOT is open source data analysis framework used by high energy physics
-and others, born at CERN.
+ROOT is open source data analysis framework used by HEP, born at CERN.
 
-This is legacy ROOT5 version that is no longer being developed.
+This is legacy ROOT 5 version that is no longer being developed.
+Works correctly together with upstream (or any other) version of ROOT.
+
+$ sudo dnf install root5
+$ source /opt/root5/bin/thisroot.sh
+$ root
 
 %prep
 # forgesetup = uncompress SOURCE0, cd, chmod
@@ -69,7 +76,6 @@ echo %{prefix_root5}
             --enable-astiff \
             --enable-cintex \
             --enable-reflex \
-            --enable-gviz \
             --enable-genvector \
             --enable-mysql \
             --enable-opengl \
@@ -79,8 +85,8 @@ echo %{prefix_root5}
             --enable-xml \
             --with-mysql-incdir=/usr/include/mysql/
 
-# Enabled support for asimage, astiff, cintex, explicitlink, gviz, genvector,
-# mysql, opengl, reflex, shadowpw, shared, soversion, sqlite, x11, xft, xml.
+# Enabled support for asimage, astiff, cintex, explicitlink, genvector, mysql,
+# opengl, reflex, shadowpw, shared, soversion, sqlite, x11, xft, xml.
 
 echo %{?_smp_mflags}
 make %{?_smp_mflags}
@@ -95,10 +101,18 @@ echo $(pwd)
 echo %{buildroot}%{prefix_root5}
 
 rm -rf %{buildroot}/tmp/
+rm -rf %{buildroot}%{prefix_root5}/test/ios/
 rm -rf %{buildroot}%{prefix_root5}/tutorials/pyroot/
 rm -rf %{buildroot}%{prefix_root5}/tutorials/eve/lineset.py
 rm -rf %{buildroot}%{prefix_root5}/tutorials/histfactory/makeQuickModel.py
 rm -rf %{buildroot}%{prefix_root5}/tutorials/histfactory/example.py
+
+cat << EOF > %{buildroot}%{prefix_root5}/etc/gitinfo.txt
+heads/%{branch}
+$(echo "%{distprefix}" | sed 's/.*git//')
+$(date --date="%{date}" "+%b %d %Y")
+EOF
+cp -pr config/ %{buildroot}%{prefix_root5}
 
 # %%clean
 # clean in modern rpm (rpmbuild 4.6+) is deprecated
@@ -115,5 +129,5 @@ rm -rf %{buildroot}%{prefix_root5}/tutorials/histfactory/example.py
 # rpmbuild -bb --noclean $HOME/rpmbuild/SPECS/root5.spec
 
 %changelog
-* Wed Apr 15 2026 Jan Musinsky <musinsky@gmail.com> - 5.34.39-1
+* Thu Apr 16 2026 Jan Musinsky <musinsky@gmail.com> - 5.34.39-1
 - Initial ROOT 5 build
