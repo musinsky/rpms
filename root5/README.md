@@ -1,5 +1,5 @@
 <!-- markdownlint-disable MD033 MD041-->
-<p align="right">last edit: 2026-04-10</p>
+<p align="right">last edit: 2026-04-15</p>
 <!-- markdownlint-enable  MD033 MD041-->
 
 # ROOT 5
@@ -22,6 +22,11 @@ or [GCC 4.9](https://gcc.gnu.org/gcc-4.9/changes.html) (GCC 4.9.0 [released](htt
 - [GCC 5](https://gcc.gnu.org/gcc-5/changes.html) (GCC 5.1 [released](https://gcc.gnu.org/gcc-5/) 2015-04)
   - Default standard for C is now `-std=gnu11` (instead of `-std=gnu89/gnu90`)
   - Default standard for C++ is `-std=gnu++98`
+- Recommended standards for latest ROOT 5 in the [latest](https://gcc.gnu.org/releases.html) versions of GCC
+  - **use `c11` (or `gnu11`) as standard for C**
+  - **use `c++11` (or `gnu++11`) as standard for C++**
+  - see also [C](https://gcc.gnu.org/projects/c-status.html) and [C++](https://gcc.gnu.org/projects/cxx-status.html)
+  standards support in GCC
 
 ## ROOT 5 in Fedora
 
@@ -38,13 +43,33 @@ or [GCC 4.9](https://gcc.gnu.org/gcc-4.9/changes.html) (GCC 4.9.0 [released](htt
 
 ## Notes
 
-- Recommended standards for latest ROOT 5 (see also [C](https://gcc.gnu.org/projects/c-status.html) and
-  [C++](https://gcc.gnu.org/projects/cxx-status.html) standards support in GCC)
-  - use `c11` (or `gnu11`) as standard for C
-  - use `c++11` (or `gnu++11`) as standard for C++
-
----
-
 - <https://root.cern.ch/root/html534/ClassIndex.html> (last changed/generated 2015-09-08)
-- option [`--enable-cxx14`](https://github.com/root-project/root/commit/c57b379995525a04558652fdf4c954301a5549c1) added
+- Option [`--enable-cxx14`](https://github.com/root-project/root/commit/c57b379995525a04558652fdf4c954301a5549c1) added
   in 2014-10 via `-std=c++1y` in GCC, standard `c++14` in GCC 4.9 (released 2014-04) as experimantal via `-std=c++1y`
+- If compilation with `--enable-xrootd` is required then latest ROOT 5 with latest GCC need latest XRootD of 4.x series
+  ([v4.12.9](https://github.com/xrootd/xrootd/releases/tag/v4.12.9) or
+  [v4.12.8](https://github.com/xrootd/xrootd/releases/tag/v4.12.8))
+
+## ROOT 5 compilation with latest GCC versions
+
+Solved issues 2026-04 (Fedora 43, gcc 15.2): [1](https://github.com/musinsky/rpms/issues/1),
+[2](https://github.com/musinsky/rpms/issues/2), [3](https://github.com/musinsky/rpms/issues/3) and
+[4](https://github.com/musinsky/rpms/issues/4)
+
+<!-- markdownlint-disable MD014-->
+```console
+$ cd /cern/
+$ git clone --depth 1 --branch=v5-34-00-patches https://github.com/root-project/root.git root_v5-34-00-patches
+$ # ln -s root_v5-34-00-patches root            # export ROOTSYS="/cern/root"
+$ cd root_v5-34-00-patches
+$ curl https://raw.githubusercontent.com/musinsky/ROOTHighlight/master/root_v5-34-00-patches/HighlightROOT5.patch --remote-name
+$ git apply HighlightROOT5.patch
+
+$ ./configure --disable-memstat --disable-mathmore --disable-tmva --disable-python --disable-xrootd
+$ make
+
+$ export ROOTSYS="$(pwd)"
+$ # export ROOTSYS="$(root-config --prefix)"    # if $ROOTSYS is declare
+$ make install
+```
+<!-- markdownlint-enable  MD014-->
