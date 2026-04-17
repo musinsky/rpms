@@ -1,5 +1,5 @@
 <!-- markdownlint-disable MD033 MD041-->
-<p align="right">last edit: 2026-04-15</p>
+<p align="right">last edit: 2026-04-17</p>
 <!-- markdownlint-enable  MD033 MD041-->
 
 # ROOT 5
@@ -47,7 +47,7 @@ or [GCC 4.9](https://gcc.gnu.org/gcc-4.9/changes.html) (GCC 4.9.0 [released](htt
 - Option [`--enable-cxx14`](https://github.com/root-project/root/commit/c57b379995525a04558652fdf4c954301a5549c1) added
   in 2014-10 via `-std=c++1y` in GCC, standard `c++14` in GCC 4.9 (released 2014-04) as experimantal via `-std=c++1y`
 - If compilation with `--enable-xrootd` is required then latest ROOT 5 with latest GCC need latest XRootD of 4.x series ([v4.12.9](https://github.com/xrootd/xrootd/releases/tag/v4.12.9))
-  - OpenSSL 3 (Fedora 36+ and RHEL 9+) and latest XRootD of 4.x series **cannot be compiled**
+  - OpenSSL 3 (Fedora 36+ and RHEL 9+) and latest XRootD of 4.x series (required OpenSSL 1.x) cannot be compiled without XRootD patching
 
 ## ROOT 5 compilation with latest GCC versions
 
@@ -61,14 +61,14 @@ $ cd /cern/
 $ git clone --depth 1 --branch=v5-34-00-patches https://github.com/root-project/root.git root_v5-34-00-patches
 $ # ln -s root_v5-34-00-patches root            # export ROOTSYS="/cern/root"
 $ cd root_v5-34-00-patches
-$ curl https://raw.githubusercontent.com/musinsky/ROOTHighlight/master/root_v5-34-00-patches/HighlightROOT5.patch --remote-name
+$ curl -O https://raw.githubusercontent.com/musinsky/ROOTHighlight/master/root_v5-34-00-patches/HighlightROOT5.patch
 $ git apply HighlightROOT5.patch
 
-$ ./configure --disable-memstat --disable-mathmore --disable-tmva --disable-python --disable-xrootd
+$ ./configure --disable-memstat --disable-xrootd --disable-mathmore --disable-tmva --disable-python
 $ make
 
 $ export ROOTSYS="$(pwd)"
-$ # export ROOTSYS="$(root-config --prefix)"    # if $ROOTSYS is declare
+$ # export ROOTSYS="$(root-config --prefix)"    # if ROOTSYS is not declare (only PATH)
 $ make install
 ```
 <!-- markdownlint-enable  MD014-->
