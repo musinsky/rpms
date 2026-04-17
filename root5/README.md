@@ -46,8 +46,19 @@ or [GCC 4.9](https://gcc.gnu.org/gcc-4.9/changes.html) (GCC 4.9.0 [released](htt
 - <https://root.cern.ch/root/html534/ClassIndex.html> (last changed/generated 2015-09-08)
 - Option [`--enable-cxx14`](https://github.com/root-project/root/commit/c57b379995525a04558652fdf4c954301a5549c1) added
   in 2014-10 via `-std=c++1y` in GCC, standard `c++14` in GCC 4.9 (released 2014-04) as experimantal via `-std=c++1y`
-- If compilation with `--enable-xrootd` is required then latest ROOT 5 with latest GCC need latest XRootD of 4.x series ([v4.12.9](https://github.com/xrootd/xrootd/releases/tag/v4.12.9))
-  - OpenSSL 3 (Fedora 36+ and RHEL 9+) and latest XRootD of 4.x series (required OpenSSL 1.x) cannot be compiled without XRootD patching
+- If compilation with `--enable-xrootd` is required then latest ROOT 5 with latest GCC need latest XRootD of 4.x series
+  ([v4.12.9](https://github.com/xrootd/xrootd/releases/tag/v4.12.9))
+  - OpenSSL 3 (Fedora 36+ and RHEL 9+) and latest XRootD of 4.x series (required OpenSSL 1.x) cannot be compiled without
+    XRootD patching
+- `/opt/root5/etc/system.rootlogon.C` (or better slightly modify
+  [`TRint::PrintLogo`](https://github.com/root-project/root/blob/v5-34-00-patches/core/rint/src/TRint.cxx#L460) in
+  `core/rint/src/TRint.cxx` source code)
+
+  ```c++
+  {
+    Printf("ROOT 5 Version: %s", gROOT->GetVersion());
+  }
+  ```
 
 ## ROOT 5 compilation with latest GCC versions
 
