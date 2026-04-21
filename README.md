@@ -13,7 +13,7 @@ Personal repository for package maintenance.
 
 ```console
 curl https://raw.githubusercontent.com/musinsky/rpms/rawhide/hunspell-sk/hunspell-sk.create.SRPM.package.sh | bash
-curl https://raw.githubusercontent.com/musinsky/rpms/rawhide/hunspell-sk/hunspell-ru.create.SRPM.package.sh | bash
+curl https://raw.githubusercontent.com/musinsky/rpms/rawhide/hunspell-ru/hunspell-ru.create.SRPM.package.sh | bash
 ```
 
 * add legacy ROOT 5 (branch [v5-34-00-patches](https://github.com/root-project/root/commits/v5-34-00-patches)), works
