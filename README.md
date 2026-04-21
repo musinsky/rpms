@@ -16,8 +16,7 @@ curl https://raw.githubusercontent.com/musinsky/rpms/rawhide/hunspell-sk/hunspel
 curl https://raw.githubusercontent.com/musinsky/rpms/rawhide/hunspell-sk/hunspell-ru.create.SRPM.package.sh | bash
 ```
 
-* add legacy ROOT 5 (latest version of
-  [v5-34-00-patches](https://root.cern.ch/install/all_releases/root-version-v5-34-00-patch-release-notes/)), works
+* add legacy ROOT 5 (branch [v5-34-00-patches](https://github.com/root-project/root/commits/v5-34-00-patches)), works
   correctly together with Fedora version of [root](https://src.fedoraproject.org/rpms/root/blob/rawhide/f/root.spec)
 
 ```console
