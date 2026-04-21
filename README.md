@@ -1,5 +1,5 @@
 <!-- markdownlint-disable MD033 MD041-->
-<p align="right">last edit: 2026-04-21</p>
+<p align="right">last edit: 2026-04-22</p>
 <!-- markdownlint-enable  MD033 MD041-->
 
 # Fedora Package Sources
@@ -14,6 +14,12 @@ Personal repository for package maintenance.
 ```console
 curl https://raw.githubusercontent.com/musinsky/rpms/rawhide/hunspell-sk/hunspell-sk.create.SRPM.package.sh | bash
 curl https://raw.githubusercontent.com/musinsky/rpms/rawhide/hunspell-ru/hunspell-ru.create.SRPM.package.sh | bash
+```
+
+* add [hunspell-ru-wiki](https://addons.mozilla.org/firefox/addon/2938464/) dictionary
+
+```console
+curl https://raw.githubusercontent.com/musinsky/rpms/rawhide/hunspell-ru-wiki/hunspell-ru-wiki.create.SRPM.package.sh | bash
 ```
 
 * add legacy ROOT 5 (branch [v5-34-00-patches](https://github.com/root-project/root/commits/v5-34-00-patches)), works
