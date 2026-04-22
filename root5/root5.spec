@@ -22,6 +22,7 @@ Source0:   %{forgesource}
 Source1:   root5.with.root.master.2026-02-18.files.tar.gz
 Patch10:   https://raw.githubusercontent.com/musinsky/rpms/rawhide/root5/g__cfunc.c.patch
 Patch90:   https://raw.githubusercontent.com/musinsky/rpms/rawhide/root5/HighlightROOT5.patch
+Source9:   https://raw.githubusercontent.com/musinsky/rpms/rawhide/root5/HighlightROOT5.tutorials.tar.xz
 
 BuildRequires: gcc gcc-c++ gcc-gfortran make binutils
 BuildRequires: libX11-devel libXpm-devel libXft-devel libXext-devel
@@ -44,6 +45,7 @@ $ root
 # forgesetup = uncompress SOURCE0, cd, chmod
 %forgesetup -v
 tar -xzf %{SOURCE1}
+tar -xJf %{SOURCE9}
 # patches have different format
 %patch -P 10 -b .orig
 %patch -P 90 -p 1 -b .orig
@@ -129,5 +131,5 @@ cp -pr config/ %{buildroot}%{prefix_root5}
 # rpmbuild -bb --noclean $HOME/rpmbuild/SPECS/root5.spec
 
 %changelog
-* Thu Apr 16 2026 Jan Musinsky <musinsky@gmail.com> - 5.34.39-1
+* Wed Apr 22 2026 Jan Musinsky <musinsky@gmail.com> - 5.34.39-1
 - Initial ROOT 5 build
