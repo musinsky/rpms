@@ -14,13 +14,13 @@
 Name:      hunspell-sk
 Epoch:     2
 Version:   %{date}
-# always increment release number (hunspell-sk-20251001-1)
 Release:   1
 BuildArch: noarch
 License:   MPL 2.0
 URL:       https://www.sk-spell.sk.cx/
 Summary:   Slovak dictionaries for hunspell
 
+# hunspell-sk-20251001-1
 Source0:   %{forgesource}
 Source1:   https://addons.mozilla.org/firefox/downloads/file/4046244/sk_sk_ascii_spellchecking-2.4.7.xpi
 
