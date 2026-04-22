@@ -20,12 +20,12 @@ Summary:   Russian dictionaries for hunspell
 # https://addons.mozilla.org/firefox/addon/russian-spellchecking-dic-3703/
 # src10 = Russian spellchecking dictionary by Alexander Slovesnik
 Source10:  https://addons.mozilla.org/firefox/downloads/file/4270210/russian_spellchecking_dic_3703-0.4.5.2resigned1.xpi
-%global dict10_name ru_RU-10
+%global dict10_name ru_RU-2013-06
 #
 # https://addons.mozilla.org/firefox/addon/russian-hunspell-dictionary/
 # src20 = Russian Hunspell dictionary by Aleksandr Klyukvin
 Source20:  https://addons.mozilla.org/firefox/downloads/file/4270388/russian_hunspell_dictionary-1.0.20131101.3resigned1.xpi
-%global dict20_name ru_RU-20
+%global dict20_name ru_RU-2013-11
 
 BuildRequires: unzip dos2unix
 Requires:      hunspell
@@ -59,7 +59,9 @@ iconv -f KOI8-R -t UTF8 src10/dictionaries/ru.dic --output=%{dict_path}/%{dict10
 sed -i 's/SET KOI8-R/SET UTF-8/' %{dict_path}/%{dict10_name}.aff
 sed -i '1 i \# Firefox Russian spellchecking dictionary by Alexander Slovesnik' \
     %{dict_path}/%{dict10_name}.aff
-sed -i '2 i \# Dictionary from 2013-06-29 (based on Lebedev 0.99g5 dictionary)\n' \
+sed -i "2 i \# $(basename %{SOURCE10})" \
+    %{dict_path}/%{dict10_name}.aff
+sed -i '3 i \# Dictionary from 2013-06-29 (based on Lebedev 0.99g5 dictionary)\n' \
     %{dict_path}/%{dict10_name}.aff
 touch -md "2013-06-29" %{dict_path}/%{dict10_name}.aff
 touch -md "2013-06-29" %{dict_path}/%{dict10_name}.dic
@@ -69,7 +71,9 @@ dos2unix -n src20/dictionaries/ru_RU.aff %{dict_path}/%{dict20_name}.aff
 dos2unix -n src20/dictionaries/ru_RU.dic %{dict_path}/%{dict20_name}.dic
 sed -i '1 i \# Firefox Russian Hunspell dictionary by Aleksandr Klyukvin' \
     %{dict_path}/%{dict20_name}.aff
-sed -i '2 i \# Dictionary from 2013-11-01 (extended dictionary of Lebedev)\n' \
+sed -i "2 i \# $(basename %{SOURCE20})" \
+    %{dict_path}/%{dict20_name}.aff
+sed -i '3 i \# Dictionary from 2013-11-01 (extended dictionary of Lebedev)\n' \
     %{dict_path}/%{dict20_name}.aff
 touch -md "2013-11-01" %{dict_path}/%{dict20_name}.aff
 touch -md "2013-11-01" %{dict_path}/%{dict20_name}.dic
@@ -83,5 +87,5 @@ touch -md "2013-11-01" %{dict_path}/%{dict20_name}.dic
 %{_datadir}/%{dict_dirname}/*
 
 %changelog
-* Tue Apr 21 2026 Jan Musinsky <musinsky@gmail.com> - 2:2013-1
+* Wed Apr 22 2026 Jan Musinsky <musinsky@gmail.com> - 2:2013-1
 - Initial hunspell-ru build
