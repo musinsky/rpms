@@ -12,8 +12,8 @@
 
 Name:      root5
 Version:   5.34.39
-# always increment release number (root5-5.34.39-1.20250910git8943a40)
-Release:   1%{?dist}
+# always increment release number (root5-5.34.39-2.20250910git8943a40)
+Release:   2%{?dist}
 License:   LGPL 2.1
 URL:       https://root.cern.ch
 Summary:   Numerical data analysis framework
@@ -21,6 +21,9 @@ Summary:   Numerical data analysis framework
 Source0:   %{forgesource}
 Source1:   root5.with.root.master.2026-02-18.files.tar.gz
 Patch10:   https://raw.githubusercontent.com/musinsky/rpms/rawhide/root5/g__cfunc.c.patch
+Patch11:   https://raw.githubusercontent.com/musinsky/rpms/rawhide/root5/std.gnu11.std.gnuxx11.patch
+Patch17:   https://raw.githubusercontent.com/musinsky/rpms/rawhide/root5/std.gnu17.std.gnuxx17.patch
+Patch12:   https://raw.githubusercontent.com/musinsky/rpms/rawhide/root5/disable.proof.patch
 Patch90:   https://raw.githubusercontent.com/musinsky/rpms/rawhide/root5/HighlightROOT5.patch
 Source9:   https://raw.githubusercontent.com/musinsky/rpms/rawhide/root5/HighlightROOT5.tutorials.tar.xz
 
@@ -46,8 +49,16 @@ $ root
 %forgesetup -v
 tar -xzf %{SOURCE1}
 tar -xJf %{SOURCE9}
-# patches have different format
-%patch -P 10 -b .orig
+# patch10 only if -std=gnu23 (or higher)
+%dnl %patch -P 10 -b .orig
+# patch11 forces -std=gnu11 and -std=gnu++11, optimal standards for ROOT 5
+%dnl %patch -P 11 -b .orig
+# patch17 forces -std=gnu17 and -std=gnu++17, maximum standards for ROOT 5
+# and default standards for 11 >= gcc < 15
+%patch -P 17 -b .orig
+# patch12 disable proof
+%patch -P 12 -b .orig
+# patch90 (highlight) has different format as previous patches
 %patch -P 90 -p 1 -b .orig
 
 echo $(pwd)
@@ -131,5 +142,8 @@ cp -pr config/ %{buildroot}%{prefix_root5}
 # rpmbuild -bb --noclean $HOME/rpmbuild/SPECS/root5.spec
 
 %changelog
+* Tue May 05 2026 Jan Musinsky <musinsky@gmail.com> - 5.34.39-2
+- Fedora 44 (gcc 16), force -std=gnu17 and -std=gnu++17 standards
+
 * Wed Apr 22 2026 Jan Musinsky <musinsky@gmail.com> - 5.34.39-1
 - Initial ROOT 5 build
