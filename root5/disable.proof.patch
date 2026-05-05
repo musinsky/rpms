@@ -1,5 +1,5 @@
 --- Makefile.orig	2025-09-10 14:42:06.000000000 +0200
-+++ Makefile.noproof	2026-05-05 18:22:00.000000000 +0200
++++ Makefile	2026-05-05 18:22:00.000000000 +0200
 @@ -88,8 +88,8 @@
                  math/fumili math/mlp math/quadp net/auth gui/guibuilder io/xml \
                  math/foam math/splot math/smatrix io/sql \

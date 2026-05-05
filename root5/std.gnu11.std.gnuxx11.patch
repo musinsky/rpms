@@ -1,5 +1,5 @@
 --- config/Makefile.in.orig	2025-09-10 14:42:06.000000000 +0200
-+++ config/Makefile.in.11	2026-05-05 15:38:10.352724407 +0200
++++ config/Makefile.in	2026-05-05 15:38:10.352724407 +0200
 @@ -25,9 +25,9 @@
  USECONFIG      := @useconfig@
  MKLIBOPTIONS   := @mkliboption@
