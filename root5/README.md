@@ -1,5 +1,5 @@
 <!-- markdownlint-disable MD033 MD041-->
-<p align="right">last edit: 2026-04-17</p>
+<p align="right">last edit: 2026-05-05</p>
 <!-- markdownlint-enable  MD033 MD041-->
 
 # ROOT 5
@@ -27,6 +27,9 @@ or [GCC 4.9](https://gcc.gnu.org/gcc-4.9/changes.html) (GCC 4.9.0 [released](htt
   - **use `c++11` (or `gnu++11`) as standard for C++**
   - see also [C](https://gcc.gnu.org/projects/c-status.html) and [C++](https://gcc.gnu.org/projects/cxx-status.html)
   standards support in GCC
+- Maximum standards for latest ROOT 5 (without ROOT patching)
+  - `gnu17` as standard for C
+  - `gnu++17` as standard for C
 
 ## ROOT 5 in Fedora
 
