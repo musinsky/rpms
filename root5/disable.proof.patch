@@ -1,0 +1,22 @@
+--- Makefile.orig	2025-09-10 14:42:06.000000000 +0200
++++ Makefile.noproof	2026-05-05 18:22:00.000000000 +0200
+@@ -88,8 +88,8 @@
+                 math/fumili math/mlp math/quadp net/auth gui/guibuilder io/xml \
+                 math/foam math/splot math/smatrix io/sql \
+                 geom/geombuilder hist/spectrum hist/spectrumpainter \
+-                gui/fitpanel proof/proof proof/proofplayer \
+-                gui/sessionviewer gui/guihtml gui/recorder
++                gui/fitpanel \
++                gui/guihtml gui/recorder
+ 
+ ifeq ($(ARCH),win32)
+ MODULES      += core/winnt graf2d/win32gdk
+@@ -292,7 +292,7 @@
+ endif
+ endif
+ ifneq ($(ARCH),win32)
+-MODULES      += net/rpdutils net/rootd proof/proofd proof/pq2 proof/proofbench
++#MODULES      += net/rpdutils net/rootd proof/proofd proof/pq2 proof/proofbench
+ endif
+ ifeq ($(BUILDTMVA),yes)
+ MODULES      += tmva math/genetic
