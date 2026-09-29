@@ -6,16 +6,16 @@
 %global dict_path %{buildroot}%{_datadir}/%{dict_dirname}
 
 Name:      hunspell-ru-wiki
-Version:   1.120
+Version:   1.127
 Release:   1
 BuildArch: noarch
 License:   MPL 2.0
 URL:       https://addons.mozilla.org/firefox/addon/2938464/
 Summary:   Russian dictionary (wiktionary) for hunspell
 
-# hunspell-ru-wiki-1.120-1
-%global date 2026-04-03
-Source0:   https://addons.mozilla.org/firefox/downloads/file/4750542/2938464-%{version}.xpi
+# hunspell-ru-wiki-1.127-1
+%global date 2026-09-02
+Source0:   https://addons.mozilla.org/firefox/downloads/file/5001247/2938464-%{version}.xpi
 
 BuildRequires: unzip
 Requires:      hunspell
@@ -55,5 +55,8 @@ touch -md "%{date}" %{dict_path}/ru_RU-wiki.dic
 %{_datadir}/%{dict_dirname}/*
 
 %changelog
+* Tue Sep 29 2026 Jan Musinsky <musinsky@gmail.com> - 1.127-1
+- ru_RU-wiki upstream 1.127
+
 * Wed Apr 22 2026 Jan Musinsky <musinsky@gmail.com> - 1.120-1
 - Initial hunspell-ru-wiki build
