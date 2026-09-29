@@ -51,18 +51,19 @@ $ root
 tar -xzf %{SOURCE1}
 tar -xJf %{SOURCE9}
 # patch10 only if -std=gnu23 (or higher)
-%dnl %patch -P 10 -b .orig
+%dnl %patch -P 10 -b .orig.10
 # patch11 forces -std=gnu11 and -std=gnu++11, optimal standards for ROOT 5
-%dnl %patch -P 11 -b .orig
+%dnl %patch -P 11 -b .orig.11
 # patch17 forces -std=gnu17 and -std=gnu++17, maximum standards for ROOT 5
 # and default standards for 11 >= gcc < 15
-%patch -P 17 -b .orig
+%patch -P 17 -b .orig.17
 # patch12 disable proof
-%patch -P 12 -b .orig
+%patch -P 12 -b .orig.12
 # patch13 replace pcre by pcre2
 %patch -P 13 -p 1 -b .orig.13
-# patch90 (highlight) has different format as previous patches
-%patch -P 90 -p 1 -b .orig
+# patch90 add Highlight to root5
+%patch -P 90 -p 1 -b .orig.90
+#patch       -p 1 removes 1 prefix directory (default '-p 0' keeps the prefix)
 
 echo $(pwd)
 echo %{prefix_root5}
