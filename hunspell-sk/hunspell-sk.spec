@@ -5,8 +5,8 @@
 %endif
 
 %global forgeurl https://github.com/sk-spell/hunspell-sk
-%global commit   864a08dcb5b861b98bbbebaa8f6311f3f1e654f8
-%global date     20251001
+%global commit   ee4ffc39c1955411293dc0cf6263daa344fd18a4
+%global date     20260925
 %forgemeta -i
 
 # https://src.fedoraproject.org/rpms/hunspell-sk/blob/rawhide/f/hunspell-sk.spec
@@ -18,11 +18,13 @@ Release:   1
 BuildArch: noarch
 License:   MPL 2.0
 URL:       https://www.sk-spell.sk.cx/
+#          https://addons.mozilla.org/en-US/firefox/addon/slovak-spell-checking-dictiona/
+#          https://addons.mozilla.org/en-US/firefox/addon/sk-sk-ascii_spellchecking/
 Summary:   Slovak dictionaries for hunspell
 
-# hunspell-sk-20251001-1
+# hunspell-sk-20260925-1
 Source0:   %{forgesource}
-Source1:   https://addons.mozilla.org/firefox/downloads/file/4046244/sk_sk_ascii_spellchecking-2.4.7.xpi
+Source1:   https://addons.mozilla.org/firefox/downloads/file/5059000/sk_sk_ascii_spellchecking-2.4.9.xpi
 
 BuildRequires: unzip
 Requires:      hunspell
@@ -68,5 +70,9 @@ cp -p dictionaries/sk-SK-ascii.dic %{buildroot}%{_datadir}/%{dict_dirname}/sk_SK
 # rpmbuild -bb --noclean $HOME/rpmbuild/SPECS/hunspell-sk.spec
 
 %changelog
+* Tue Sep 29 2026 Jan Musinsky <musinsky@gmail.com> - 2:20260925-1
+- sk_SK upsteram 20260925 (2.4.9)
+- sk-SK-ascii upstream 2.4.9
+
 * Tue Apr 21 2026 Jan Musinsky <musinsky@gmail.com> - 2:20251001-1
 - Initial hunspell-sk build
