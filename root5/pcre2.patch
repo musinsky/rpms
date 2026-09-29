@@ -1,0 +1,54 @@
+diff -Naur root5_old/configure root5_new/configure
+--- root5_old/configure	2025-09-10 14:42:06.000000000 +0200
++++ root5_new/configure	2026-09-29 22:27:46.609203826 +0200
+@@ -2976,18 +2976,18 @@
+ if test "x$enable_builtin_pcre" = "x" || \
+    test "x$enable_builtin_pcre" = "xno" ; then
+ 
+-   checking_msg "pcre-config"
+-   if `$cwhich pcre-config > /dev/null 2>&1` && test "x$host" = "x" ; then
+-      $cwhich pcre-config
++   checking_msg "pcre2-config"
++   if `$cwhich pcre2-config > /dev/null 2>&1` && test "x$host" = "x" ; then
++      $cwhich pcre2-config
+ 
+       message "Checking for libpcre version >= 3.9"
+-      pcre_version=`pcre-config --version | \
++      pcre_version=`pcre2-config --version | \
+           tr '.' ' ' | \
+           awk 'BEGIN { FS = " "; } \
+               { printf "%d", ($''1 * 1000 + $''2) * 1000 + $''3;}'`
+       # First good version is 3.9
+       if test $pcre_version -lt 3009000 ; then
+-         result "no (`pcre-config --version`)"
++         result "no (`pcre2-config --version`)"
+          enable_builtin_pcre="yes"
+       else
+          result "ok"
+diff -Naur root5_old/core/base/src/TPRegexp.cxx root5_new/core/base/src/TPRegexp.cxx
+--- root5_old/core/base/src/TPRegexp.cxx	2025-09-10 14:42:06.000000000 +0200
++++ root5_new/core/base/src/TPRegexp.cxx	2026-09-29 23:00:16.557499572 +0200
+@@ -29,6 +29,8 @@
+ #include "TObjString.h"
+ #include "TError.h"
+ 
++#define USE_PCRE2
++
+ #ifdef USE_PCRE2
+ #define PCRE2_CODE_UNIT_WIDTH 8
+ #include <pcre2.h>
+diff -Naur root5_old/core/pcre/Module.mk root5_new/core/pcre/Module.mk
+--- root5_old/core/pcre/Module.mk	2025-09-10 14:42:06.000000000 +0200
++++ root5_new/core/pcre/Module.mk	2026-09-29 23:47:28.549588626 +0200
+@@ -8,8 +8,9 @@
+ 
+ ifneq ($(BUILTINPCRE), yes)
+ 
+-PCRELIBF     := $(shell pcre-config --libs)
+-PCREINC      := $(shell pcre-config --cflags)
++# in 'core/base/src/TPRegexp.cxx' #define PCRE2_CODE_UNIT_WIDTH 8
++PCRELIBF     := $(shell pcre2-config --libs8)
++PCREINC      := $(shell pcre2-config --cflags)
+ PCRELIB      := $(filter -l%,$(PCRELIBF))
+ PCRELDFLAGS  := $(filter-out -l%,$(PCRELIBF))
+ PCREDEP      :=

@@ -24,12 +24,13 @@ Patch10:   https://raw.githubusercontent.com/musinsky/rpms/rawhide/root5/g__cfun
 Patch11:   https://raw.githubusercontent.com/musinsky/rpms/rawhide/root5/std.gnu11.std.gnuxx11.patch
 Patch17:   https://raw.githubusercontent.com/musinsky/rpms/rawhide/root5/std.gnu17.std.gnuxx17.patch
 Patch12:   https://raw.githubusercontent.com/musinsky/rpms/rawhide/root5/disable.proof.patch
+Patch13:   https://raw.githubusercontent.com/musinsky/rpms/rawhide/root5/pcre2.patch
 Patch90:   https://raw.githubusercontent.com/musinsky/rpms/rawhide/root5/HighlightROOT5.patch
 Source9:   https://raw.githubusercontent.com/musinsky/rpms/rawhide/root5/HighlightROOT5.tutorials.tar.xz
 
 BuildRequires: gcc gcc-c++ gcc-gfortran make binutils
 BuildRequires: libX11-devel libXpm-devel libXft-devel libXext-devel
-BuildRequires: freetype-devel pcre-devel zlib-devel xz-devel lz4-devel xxhash-devel
+BuildRequires: freetype-devel pcre2-devel zlib-devel xz-devel lz4-devel xxhash-devel
 BuildRequires: mesa-libGL-devel mesa-libGLU-devel glew-devel ftgl-devel
 BuildRequires: mariadb-devel sqlite-devel
 BuildRequires: libAfterImage-devel libpng-devel libxml2-devel
@@ -58,6 +59,8 @@ tar -xJf %{SOURCE9}
 %patch -P 17 -b .orig
 # patch12 disable proof
 %patch -P 12 -b .orig
+# patch13 replace pcre by pcre2
+%patch -P 13 -p 1 -b .orig.13
 # patch90 (highlight) has different format as previous patches
 %patch -P 90 -p 1 -b .orig
 
@@ -142,6 +145,9 @@ cp -pr config/ %{buildroot}%{prefix_root5}
 # rpmbuild -bb --noclean $HOME/rpmbuild/SPECS/root5.spec
 
 %changelog
+* Wed Sep 30 2026 Jan Musinsky <musinsky@gmail.com> - 5.34.39-3
+- Fedora 45 only with pcre2
+
 * Tue May 05 2026 Jan Musinsky <musinsky@gmail.com> - 5.34.39-2
 - Fedora 44 (gcc 16), force -std=gnu17 and -std=gnu++17 standards
 
