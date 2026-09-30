@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
-# 2026-04-14
+# 2026-09-30
 # https://github.com/musinsky/rpms/blob/rawhide/root5/root5.get.root.master.files.sh
 
 FINAL_DIR="$PWD"
 [[ -d "$1" ]] && FINAL_DIR="$(realpath "$1")"
-ROOT_GH="https://raw.githubusercontent.com/root-project/root/master"
+COMMIT_SHA="master"
+COMMIT_SHA="5b911acc104f70aa16fc4f0950e76d3187a9cbce"   # fix to 2026-02-18
+ROOT_GH="https://raw.githubusercontent.com/root-project/root/$COMMIT_SHA"
 ROOT_API="https://api.github.com/repos/root-project/root/commits"
 
 ROOT5_DIR="${TMPDIR:-/tmp}"
@@ -17,27 +19,27 @@ RMKDEPEND_DIR="misc/rmkdepend"   # ROOT master
 FILES=( "cppsetup.c" "def.h" "ifparser.c" "ifparser.h" "imakemdep.h"
         "include.c" "main.c" "mainroot.cxx" "parse.c" "pr.c" )
 for FF in "${FILES[@]}"; do
-    curl --silent --write-out "%{url}\n=> %{filename_effective}\n" \
-         --location "$ROOT_GH/$RMKDEPEND_DIR/$FF" \
-         --remote-name --output-dir "$RMKDEPEND_DIR5" --create-dirs
+  curl --silent --write-out "%{url}\n=> %{filename_effective}\n" \
+       --location "$ROOT_GH/$RMKDEPEND_DIR/$FF" \
+       --remote-name --output-dir "$RMKDEPEND_DIR5" --create-dirs
 done
-RMKDEPEND_DATE=$(curl --silent "$ROOT_API?path=$RMKDEPEND_DIR&per_page=1" |
-                     jq --raw-output '.[0].commit.committer.date')
-printf "Last commit: %s in 'root/master/%s/' dir\n\n" \
-       "$RMKDEPEND_DATE"  "$RMKDEPEND_DIR"
+RMKDEPEND_DATE=$(curl --silent "$ROOT_API?path=$RMKDEPEND_DIR&sha=$COMMIT_SHA&per_page=1" |
+                   jq --raw-output '.[0].commit.committer.date')
+printf "Last commit: %s in 'root/%s/%s/' dir\n\n" \
+       "$RMKDEPEND_DATE" "${COMMIT_SHA:0:7}" "$RMKDEPEND_DIR"
 
 MINICERN_DIR5="misc/minicern/src" # ROOT 5
 MINICERN_DIR="misc/minicern/src"  # ROOT master
 FILES=( "cernlib.c" "hbook.f" "kernlib.f" "zebra.f" )
 for FF in "${FILES[@]}"; do
-    curl --silent --write-out "%{url}\n=> %{filename_effective}\n" \
-         --location "$ROOT_GH/$MINICERN_DIR/$FF" \
-         --remote-name --output-dir "$MINICERN_DIR5" --create-dirs
+  curl --silent --write-out "%{url}\n=> %{filename_effective}\n" \
+       --location "$ROOT_GH/$MINICERN_DIR/$FF" \
+       --remote-name --output-dir "$MINICERN_DIR5" --create-dirs
 done
-MINICERN_DATE=$(curl --silent "$ROOT_API?path=$MINICERN_DIR&per_page=1" |
-                    jq --raw-output '.[0].commit.committer.date')
-printf "Last commit: %s in 'root/master/%s/' dir\n\n" \
-       "$MINICERN_DATE" "$MINICERN_DIR"
+MINICERN_DATE=$(curl --silent "$ROOT_API?path=$MINICERN_DIR&sha=$COMMIT_SHA&per_page=1" |
+                  jq --raw-output '.[0].commit.committer.date')
+printf "Last commit: %s in 'root/%s/%s/' dir\n\n" \
+       "$MINICERN_DATE" "${COMMIT_SHA:0:7}" "$MINICERN_DIR"
 
 LAST_DATE="$RMKDEPEND_DATE"
 [[ "$MINICERN_DATE" > "$RMKDEPEND_DATE" ]] && LAST_DATE="$MINICERN_DATE"
