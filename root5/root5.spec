@@ -12,8 +12,8 @@
 
 Name:      root5
 Version:   5.34.39
-# always increment release number (root5-5.34.39-2.20250910git8943a40)
-Release:   2%{?dist}
+# always increment release number (root5-5.34.39-3.20250910git8943a40)
+Release:   3%{?dist}
 License:   LGPL 2.1
 URL:       https://root.cern.ch
 Summary:   Numerical data analysis framework
@@ -147,7 +147,7 @@ cp -pr config/ %{buildroot}%{prefix_root5}
 
 %changelog
 * Wed Sep 30 2026 Jan Musinsky <musinsky@gmail.com> - 5.34.39-3
-- Fedora 45 only with pcre2
+- Fedora 45 only with pcre2 package
 
 * Tue May 05 2026 Jan Musinsky <musinsky@gmail.com> - 5.34.39-2
 - Fedora 44 (gcc 16), force -std=gnu17 and -std=gnu++17 standards
