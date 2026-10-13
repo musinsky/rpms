@@ -1,5 +1,5 @@
 <!-- markdownlint-disable MD033 MD041-->
-<p align="right">last edit: 2026-04-22</p>
+<p align="right">last edit: 2026-10-14</p>
 <!-- markdownlint-enable  MD033 MD041-->
 
 # Fedora Package Sources
@@ -37,4 +37,11 @@ curl https://raw.githubusercontent.com/musinsky/rpms/rawhide/hunspell-ru-wiki/hu
 
 ```console
 curl https://raw.githubusercontent.com/musinsky/rpms/rawhide/root5/root5.create.SRPM.package.sh | bash
+```
+
+* add [ServiceMaster](https://github.com/Lennart1978/servicemaster) tool  
+  [![Copr build status](https://copr.fedorainfracloud.org/coprs/musinsky/rpm/package/servicemaster/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/musinsky/rpm/package/servicemaster/)
+
+```console
+curl https://raw.githubusercontent.com/musinsky/rpms/rawhide/servicemaster/servicemaster.create.SRPM.package.sh | bash
 ```
