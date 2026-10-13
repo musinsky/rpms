@@ -6,6 +6,7 @@ Summary:   Linux Systemd administration tool with nice TUI
 License:   MIT
 URL:       https://github.com/Lennart1978/servicemaster
 Source:    https://github.com/Lennart1978/servicemaster/archive/V%{version}/%{name}-%{version}.tar.gz
+Patch1:    https://raw.githubusercontent.com/musinsky/rpms/rawhide/servicemaster/no.etc.install.patch
 
 BuildRequires: meson cmake gcc
 BuildRequires: ncurses-devel systemd-devel
@@ -21,7 +22,9 @@ system and user units, making it easier to manage your units without leaving
 the command line.
 
 %prep
-%autosetup
+%dnl %autosetup -p0
+%setup
+%patch -P 1 -p0 -b .orig.1
 
 %build
 %meson
@@ -38,7 +41,7 @@ install -Dpm 0644 %{name}.toml \
 %files
 %{_bindir}/%{name}
 %{_mandir}/man1/%{name}.1*
-%{_sysconfdir}/%{name}/%{name}.toml
+%config(noreplace) %{_sysconfdir}/%{name}/%{name}.toml
 
 %changelog
 * Wed Oct 14 2026 Jan Musinsky <musinsky@gmail.com> - 1.8.0-1
