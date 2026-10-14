@@ -8,6 +8,13 @@ Personal repository for package maintenance.
 
 ## Create SRPM packages
 
+* add [Authenticator](https://gitlab.gnome.org/World/Authenticator) application  
+  [![Copr build status](https://copr.fedorainfracloud.org/coprs/musinsky/rpm/package/authenticator/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/musinsky/rpm/package/authenticator/)
+
+```console
+curl https://raw.githubusercontent.com/musinsky/rpms/rawhide/authenticator/authenticator.create.SRPM.package.sh | bash
+```
+
 * replace outdated Fedora [hunspell-sk](https://src.fedoraproject.org/rpms/hunspell-sk/blob/rawhide/f/hunspell-sk.spec)
   dictionary  
   [![Copr build status](https://copr.fedorainfracloud.org/coprs/musinsky/rpm/package/hunspell-sk/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/musinsky/rpm/package/hunspell-sk/)
