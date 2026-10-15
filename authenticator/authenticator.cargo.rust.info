@@ -1,0 +1,17 @@
+# 2026-10-15
+
+# https://developer.fedoraproject.org/tech/languages/rust/rust-installation.html
+# https://developer.fedoraproject.org/tech/languages/rust/rust-cargo.html
+
+cd rustProgram/
+mkdir builddir
+meson setup builddir --buildtype=release --prefix="$HOME/rustProgram"
+meson compile -C builddir
+meson install -C builddir
+
+# rpm spec examples
+https://src.fedoraproject.org/rpms/fractal
+https://gitlab.gnome.org/World/fractal
+
+https://src.fedoraproject.org/rpms/fragments
+https://gitlab.gnome.org/World/Fragments
